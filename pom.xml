@@ -59,6 +59,13 @@
             <version>1.2.62</version>
         </dependency>
 
+        <!--java 发送http请求的工具类-->
+        <dependency>
+            <groupId>com.github.kevinsawicki</groupId>
+            <artifactId>http-request</artifactId>
+            <version>6.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
