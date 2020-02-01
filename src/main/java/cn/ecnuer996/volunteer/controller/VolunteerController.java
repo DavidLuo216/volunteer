@@ -1,58 +1,68 @@
 package cn.ecnuer996.volunteer.controller;
 
-import cn.ecnuer996.volunteer.dao.VolunteerDao;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
-import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.implement.VolunteerServiceImpl;
+import cn.ecnuer996.volunteer.util.AppUtil;
+import cn.ecnuer996.volunteer.util.HttpRequest;
+import cn.ecnuer996.volunteer.util.JsonResult;
+import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 11135
  */
+@Api(tags = "志愿者相关接口")
 @RestController
 public class VolunteerController {
-
-    @Autowired
     VolunteerServiceImpl volunteerService;
-    @Autowired
     private VolunteerRepository volunteerRepository;
+
     @Autowired
-    private VolunteerDao volunteerDao;
-
-    @ApiOperation("获取志愿者总数")
-    @GetMapping("/volunteer-num")
-    public long getVolunteerCount(){
-        return volunteerService.getCountOfVolunteer();
+    public void setVolunteerService(VolunteerServiceImpl volunteerService) {
+        this.volunteerService = volunteerService;
     }
 
-    @ApiOperation("用昵称获取志愿者信息")
-    @GetMapping("/get-volunteer-by-nickname")
-    public Volunteer getVolunteerByNickname(String nickname){
-        return volunteerService.findByNickname(nickname);
+    @Autowired
+    public void setVolunteerRepository(VolunteerRepository volunteerRepository) {
+        this.volunteerRepository = volunteerRepository;
     }
 
-    @ApiOperation("获取所有志愿者")
-    @GetMapping("/all-volunteers")
-    public List<Volunteer> getAllVolunteers(){
-        return volunteerService.findAll();
+    @ApiOperation("志愿者微信登陆")
+    @RequestMapping(value="/wx-login",method= RequestMethod.POST)
+    public @ResponseBody
+    JsonResult weixinLogIn(@RequestParam("code") String code,
+                           @RequestParam("nickName") String nickName) {
+        String url = AppUtil.wxLoginUrl;
+        String param = "appid=" + AppUtil.appId +
+                "&secret=" + AppUtil.secret + "&js_code=" + code + "&grant_type=authorization_code";
+        String volunteerId;
+        try {
+            String ret = HttpRequest.sendGet(url, param);
+            JSONObject obj = JSONObject.parseObject(ret);
+            String openid = obj.getString("openid");
+            String sessionKey = obj.getString("session_key");
+            volunteerId=volunteerService.logIn(openid, sessionKey, nickName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonResult(JsonResult.FAIL,"微信登录出错！");
+        }
+        Map<String,Object> data=new HashMap<>();
+        data.put("id",volunteerId);
+        data.put("role","volunteer");
+        return new JsonResult(data,"微信登录成功！");
     }
 
-    @ApiOperation("测试")
-    @GetMapping("find-volunteer-by-example")
-    public Volunteer findByExample(String name){
-        Volunteer volunteer=new Volunteer();
-        volunteer.setNickname(name);
-        ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("nickname", ExampleMatcher.GenericPropertyMatchers.exact());
-        Example<Volunteer> example=Example.of(volunteer,matcher);
-        return volunteerRepository.findOne(example).orElse(volunteer);
+    @ApiOperation("获取志愿者信息")
+    @RequestMapping(value="user-info",method=RequestMethod.GET)
+    public JsonResult getUserInfo(@RequestParam("userId") String userId){
+        return new JsonResult(volunteerRepository.findById(new ObjectId(userId)),"获取用户信息成功！");
     }
+
 }

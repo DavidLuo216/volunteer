@@ -13,6 +13,7 @@ public class Volunteer {
     @Id
     private String _id;
     private String openid;
+    private String sessionKey;
     private String avatar;
     private String nickname;
     private String name;
@@ -38,6 +39,14 @@ public class Volunteer {
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    public String getSessionKey() {
+        return sessionKey;
+    }
+
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
     }
 
     public String getAvatar() {

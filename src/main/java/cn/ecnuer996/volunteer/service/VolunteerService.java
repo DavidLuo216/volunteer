@@ -8,22 +8,13 @@ import java.util.List;
  * @author 11135
  */
 public interface VolunteerService {
-    /**
-     * 返回volunteer集合中文档数目
-     * @return
-     */
-    long getCountOfVolunteer();
 
     /**
-     * 根据昵称查询
+     * 微信登陆
+     * @param openid
+     * @param sessionKey
      * @param nickname
      * @return
      */
-    Volunteer findByNickname(String nickname);
-
-    /**
-     * 查询所有志愿者
-     * @return
-     */
-    List<Volunteer> findAll();
+    String logIn(String openid,String sessionKey,String nickname);
 }
