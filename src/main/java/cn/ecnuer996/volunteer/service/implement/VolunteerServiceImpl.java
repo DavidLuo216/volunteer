@@ -6,6 +6,8 @@ import cn.ecnuer996.volunteer.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author 11135
  */
@@ -19,7 +21,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public String logIn(String openid, String sessionKey, String nickname) {
+    public String logIn(@NotNull String openid, @NotNull String sessionKey, @NotNull String nickname) {
         Volunteer volunteer=volunteerRepository.findByOpenid(openid);
         if(volunteer!=null) {
             // 已注册用户
