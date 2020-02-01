@@ -1,9 +1,5 @@
 package cn.ecnuer996.volunteer.service;
 
-import cn.ecnuer996.volunteer.entity.Volunteer;
-
-import java.util.List;
-
 /**
  * @author 11135
  */

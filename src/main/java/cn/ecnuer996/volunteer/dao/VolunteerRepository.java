@@ -15,11 +15,4 @@ public interface VolunteerRepository extends MongoRepository<Volunteer, ObjectId
      * @return
      */
     Volunteer findByOpenid(String openid);
-
-    /**
-     * 根据用户名查询
-     * @param name
-     * @return
-     */
-    Volunteer findByName(String name);
 }
