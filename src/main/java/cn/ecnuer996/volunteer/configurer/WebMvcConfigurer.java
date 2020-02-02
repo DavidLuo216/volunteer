@@ -40,6 +40,30 @@ import java.util.List;
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
 
+    /**
+     * 配置swagger访问问题
+     *
+     * @param registry registry
+     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/v2/api-docs", "/v2/api-docs?group=restful-api");
+        registry.addRedirectViewController("/swagger-resources/configuration/ui", "/swagger-resources/configuration/ui");
+        registry.addRedirectViewController("/swagger-resources/configuration/security", "/swagger-resources/configuration/security");
+        registry.addRedirectViewController("/swagger-resources", "/swagger-resources");
+    }
+
+    /**
+     * 配置swagger访问问题
+     *
+     * @param registry registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
 
     /**
      * 使用阿里 FastJson 作为JSON MessageConverter
