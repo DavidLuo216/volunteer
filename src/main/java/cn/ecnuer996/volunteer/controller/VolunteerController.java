@@ -41,22 +41,9 @@ public class VolunteerController {
     public @ResponseBody
     Result weixinLogIn(@RequestParam("code") String code,
                            @RequestParam("nickName") String nickName) {
-        String volunteerId;
-        try {
-            HttpRequest request = HttpRequest.get(AppUtil.WX_LOGIN_URL, true,
-                    "appid", AppUtil.APP_ID, "secret", AppUtil.APP_SECRET, "js_code", code, "grant_type", "authorization_code");
-            if (request.code() != 0) {
-                throw new Exception("微信登陆api请求失败");
-            }
-            String body = request.body();
-            JSONObject obj = JSONObject.parseObject(body);
-            String openid = obj.getString("openid");
-            String sessionKey = obj.getString("session_key");
-            volunteerId = volunteerService.logIn(openid, sessionKey, nickName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return  ResultGenerator.genFailResult("微信登录出错");
-        }
+
+        String volunteerId = volunteerService.logIn(code, nickName);
+
         Map<String, Object> data = new HashMap<>(2);
         data.put("id", volunteerId);
         data.put("role", "volunteer");
@@ -66,7 +53,7 @@ public class VolunteerController {
     @ApiOperation("获取志愿者信息")
     @RequestMapping(value = "user-info", method = RequestMethod.GET)
     public Result getUserInfo(@RequestParam("userId") String userId) {
-        return ResultGenerator.genSuccessResult(volunteerRepository.findById(new ObjectId(userId)));
+        return ResultGenerator.genSuccessResult(volunteerService.getVolunteerInfo(new ObjectId(userId)));
     }
 
 }
