@@ -43,8 +43,8 @@ public class VolunteerController {
                            @RequestParam("nickName") String nickName) {
         String volunteerId;
         try {
-            HttpRequest request = HttpRequest.get(AppUtil.wxLoginUrl, true,
-                    "appid", AppUtil.appId, "secret", AppUtil.secret, "js_code", code, "grant_type", "authorization_code");
+            HttpRequest request = HttpRequest.get(AppUtil.WX_LOGIN_URL, true,
+                    "appid", AppUtil.APP_ID, "secret", AppUtil.APP_SECRET, "js_code", code, "grant_type", "authorization_code");
             if (request.code() != 0) {
                 throw new Exception("微信登陆api请求失败");
             }
