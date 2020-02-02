@@ -11,7 +11,7 @@ import java.util.List;
 @Document(value = "volunteer")
 public class Volunteer {
     @Id
-    private String _id;
+    private String id;
     private String openid;
     private String sessionKey;
     private String avatar;
@@ -25,12 +25,12 @@ public class Volunteer {
     private List<String> favoriteActivity;
     private List<Record> records;
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOpenid() {

@@ -11,18 +11,18 @@ import java.time.LocalDateTime;
 @Document(collection = "essay")
 public class Essay {
     @Id
-    private String _id;
+    private String id;
     private String title;
     private LocalDateTime postTime;
     private LocalDateTime editTime;
     private String content;
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

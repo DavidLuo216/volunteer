@@ -11,22 +11,22 @@ import java.util.List;
 @Document(collection = "organization")
 public class Organization {
     @Id
-    private String _id;
+    private String id;
     private String name;
     private String icon;
     private String address;
     private String introduction;
     private Double score;
-    private Integer favorite_num;
+    private Integer favoriteNum;
     private List<String> essays;
     private List<String> activities;
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -69,12 +69,12 @@ public class Organization {
         this.score = score;
     }
 
-    public Integer getFavorite_num() {
-        return favorite_num;
+    public Integer getFavoriteNum() {
+        return favoriteNum;
     }
 
-    public void setFavorite_num(Integer favorite_num) {
-        this.favorite_num = favorite_num;
+    public void setFavoriteNum(Integer favoriteNum) {
+        this.favoriteNum = favoriteNum;
     }
 
     public List<String> getEssays() {

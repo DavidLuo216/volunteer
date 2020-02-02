@@ -12,7 +12,7 @@ import java.util.List;
 @Document(collection = "activity")
 public class Activity {
     @Id
-    private String _id;
+    private String id;
     private String title;
     private String introduction;
     private String address;
@@ -30,12 +30,12 @@ public class Activity {
     private List<Applicant> applicants;
     private List<Comment> comments;
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
