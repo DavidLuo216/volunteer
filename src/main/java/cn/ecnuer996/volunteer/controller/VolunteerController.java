@@ -3,7 +3,8 @@ package cn.ecnuer996.volunteer.controller;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
 import cn.ecnuer996.volunteer.service.implement.VolunteerServiceImpl;
 import cn.ecnuer996.volunteer.util.AppUtil;
-import cn.ecnuer996.volunteer.util.JsonResult;
+import cn.ecnuer996.volunteer.util.Result;
+import cn.ecnuer996.volunteer.util.ResultGenerator;
 import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * @author 11135
@@ -37,7 +39,7 @@ public class VolunteerController {
     @ApiOperation("志愿者微信登陆")
     @RequestMapping(value = "/wx-login", method = RequestMethod.POST)
     public @ResponseBody
-    JsonResult weixinLogIn(@RequestParam("code") String code,
+    Result weixinLogIn(@RequestParam("code") String code,
                            @RequestParam("nickName") String nickName) {
         String volunteerId;
         try {
@@ -53,18 +55,18 @@ public class VolunteerController {
             volunteerId = volunteerService.logIn(openid, sessionKey, nickName);
         } catch (Exception e) {
             e.printStackTrace();
-            return new JsonResult(JsonResult.FAIL, "微信登录出错！");
+            return  ResultGenerator.genFailResult("微信登录出错");
         }
         Map<String, Object> data = new HashMap<>(2);
         data.put("id", volunteerId);
         data.put("role", "volunteer");
-        return new JsonResult(data, "微信登录成功！");
+        return ResultGenerator.genSuccessResult(data);
     }
 
     @ApiOperation("获取志愿者信息")
     @RequestMapping(value = "user-info", method = RequestMethod.GET)
-    public JsonResult getUserInfo(@RequestParam("userId") String userId) {
-        return new JsonResult(volunteerRepository.findById(new ObjectId(userId)), "获取用户信息成功！");
+    public Result getUserInfo(@RequestParam("userId") String userId) {
+        return ResultGenerator.genSuccessResult(volunteerRepository.findById(new ObjectId(userId)));
     }
 
 }
