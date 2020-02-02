@@ -35,36 +35,36 @@ public class VolunteerController {
     }
 
     @ApiOperation("志愿者微信登陆")
-    @RequestMapping(value="/wx-login",method= RequestMethod.POST)
+    @RequestMapping(value = "/wx-login", method = RequestMethod.POST)
     public @ResponseBody
     JsonResult weixinLogIn(@RequestParam("code") String code,
                            @RequestParam("nickName") String nickName) {
         String volunteerId;
         try {
-            HttpRequest request = HttpRequest.get(AppUtil.wxLoginUrl,true,
-                    "appid",AppUtil.appId,"secret",AppUtil.secret,"js_code",code,"grant_type","authorization_code");
-            if(request.code()!=0){
+            HttpRequest request = HttpRequest.get(AppUtil.wxLoginUrl, true,
+                    "appid", AppUtil.appId, "secret", AppUtil.secret, "js_code", code, "grant_type", "authorization_code");
+            if (request.code() != 0) {
                 throw new Exception("微信登陆api请求失败");
             }
-            String body=request.body();
+            String body = request.body();
             JSONObject obj = JSONObject.parseObject(body);
             String openid = obj.getString("openid");
             String sessionKey = obj.getString("session_key");
-            volunteerId=volunteerService.logIn(openid, sessionKey, nickName);
+            volunteerId = volunteerService.logIn(openid, sessionKey, nickName);
         } catch (Exception e) {
             e.printStackTrace();
-            return new JsonResult(JsonResult.FAIL,"微信登录出错！");
+            return new JsonResult(JsonResult.FAIL, "微信登录出错！");
         }
-        Map<String,Object> data=new HashMap<>(2);
-        data.put("id",volunteerId);
-        data.put("role","volunteer");
-        return new JsonResult(data,"微信登录成功！");
+        Map<String, Object> data = new HashMap<>(2);
+        data.put("id", volunteerId);
+        data.put("role", "volunteer");
+        return new JsonResult(data, "微信登录成功！");
     }
 
     @ApiOperation("获取志愿者信息")
-    @RequestMapping(value="user-info",method=RequestMethod.GET)
-    public JsonResult getUserInfo(@RequestParam("userId") String userId){
-        return new JsonResult(volunteerRepository.findById(new ObjectId(userId)),"获取用户信息成功！");
+    @RequestMapping(value = "user-info", method = RequestMethod.GET)
+    public JsonResult getUserInfo(@RequestParam("userId") String userId) {
+        return new JsonResult(volunteerRepository.findById(new ObjectId(userId)), "获取用户信息成功！");
     }
 
 }

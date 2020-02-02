@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/EssayController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/OrganizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/ActivityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/EssayRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/OrganizationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/EssayService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/OrganizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/VolunteerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/VolunteerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/VolunteerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/VolunteerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/volunteer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/volunteer.iml" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,6 +56,18 @@
       <recent name="cn.ecnuer996.volunteer" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="VolunteerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="volunteer" />
@@ -71,18 +76,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -101,6 +94,9 @@
       <workItem from="1580445978042" duration="9326000" />
       <workItem from="1580525565770" duration="7185000" />
       <workItem from="1580537355004" duration="3793000" />
+      <workItem from="1580544252595" duration="1989000" />
+      <workItem from="1580567178109" duration="7802000" />
+      <workItem from="1580618266661" duration="551000" />
     </task>
     <task id="LOCAL-00001" summary="initialization of this project.">
       <created>1578554430766</created>

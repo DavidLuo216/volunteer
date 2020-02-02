@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface VolunteerRepository extends MongoRepository<Volunteer, ObjectId> {
     /**
      * 根据openid查询志愿者记录，以判断是否为注册用户
-     * @return
+     * @param openid
+     * @return volunteer
      */
     Volunteer findByOpenid(String openid);
 }
