@@ -36,6 +36,12 @@ public class ActivityController {
         List<String> tags= new ArrayList<>();
         tags.add("推荐活动");
 
-        return ResultGenerator.genSuccessResult(activityService.getRecommendActivities(tags));
+        return ResultGenerator.genSuccessResult(activityService.listRecommendActivities(tags));
+    }
+
+    @ApiOperation("获取活动详情")
+    @RequestMapping(value = "activity-detail", method = RequestMethod.GET)
+    public Result getRecommendActivity(String id) {
+        return ResultGenerator.genSuccessResult(activityService.getActivityDetail(new ObjectId(id)));
     }
 }

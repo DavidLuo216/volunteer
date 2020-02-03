@@ -4,12 +4,11 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/ActivityServiceImpl.java" afterDir="false" />
+    <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="add method 'get activity detail'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/ActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/dao/ActivityRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/ActivityServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +96,8 @@
       <workItem from="1580544252595" duration="1989000" />
       <workItem from="1580567178109" duration="7802000" />
       <workItem from="1580618266661" duration="5629000" />
-      <workItem from="1580630067855" duration="14504000" />
+      <workItem from="1580630067855" duration="15579000" />
+      <workItem from="1580725155704" duration="1808000" />
     </task>
     <task id="LOCAL-00001" summary="initialization of this project.">
       <created>1578554430766</created>
@@ -176,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580636823155</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add method 'get recommended activities'">
+      <created>1580657288578</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1580657288578</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,7 +213,9 @@
     <MESSAGE value="fix coding style" />
     <MESSAGE value="move impl of login to service" />
     <MESSAGE value="fix swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix swagger" />
+    <MESSAGE value="add method 'get recommended activities'" />
+    <MESSAGE value="add method 'get activity detail'" />
+    <option name="LAST_COMMIT_MESSAGE" value="add method 'get activity detail'" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="79" key="#Inspections" timestamp="1580531384873">
