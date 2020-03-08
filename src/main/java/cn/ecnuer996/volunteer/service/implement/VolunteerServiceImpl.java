@@ -38,7 +38,7 @@ public class VolunteerServiceImpl implements VolunteerService {
                     "appid", AppUtil.APP_ID, "secret", AppUtil.APP_SECRET, "js_code", code, "grant_type", "authorization_code");
             String body = request.body();
             JSONObject obj = JSONObject.parseObject(body);
-            if (obj.getString(KEY_OPENID)==null) {
+            if (obj.getString(KEY_OPENID) == null) {
                 throw new ServiceException("微信登陆api请求失败");
             }
             openid = obj.getString("openid");

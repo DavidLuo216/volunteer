@@ -18,9 +18,16 @@ public interface ActivityService {
     List<Activity> listRecommendActivities(List<String> tags);
 
     /**
-     * 获取活动详情
+     * 通过活动id获取活动详情
      * @param id 活动id
      * @return 活动详情
      */
     Activity getActivityDetail(ObjectId id);
+
+    /**
+     * 通过组织id获取该组织的活动列表
+     * @param id 组织id
+     * @return 活动列表
+     */
+    List<Activity> listActivitiesByOrganizationId(ObjectId id);
 }
