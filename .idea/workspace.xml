@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/OrganizationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/util/MongoUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/OrganizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/OrganizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/OrganizationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/ActivityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,6 +17,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -48,7 +59,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -114,7 +125,13 @@
       <workItem from="1583491652523" duration="14000" />
       <workItem from="1583571062717" duration="5371000" />
       <workItem from="1583649789613" duration="640000" />
-      <workItem from="1583675837547" duration="5999000" />
+      <workItem from="1583675837547" duration="6246000" />
+      <workItem from="1583685060178" duration="388000" />
+      <workItem from="1583732405496" duration="333000" />
+      <workItem from="1583739860779" duration="607000" />
+      <workItem from="1583760839751" duration="131000" />
+      <workItem from="1583760985613" duration="49000" />
+      <workItem from="1583761344309" duration="1154000" />
     </task>
     <task id="LOCAL-00001" summary="initialization of this project.">
       <created>1578554430766</created>

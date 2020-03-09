@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>volunteer</name>
     <description>a project for volunteer to sign up for volunteer activities</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>

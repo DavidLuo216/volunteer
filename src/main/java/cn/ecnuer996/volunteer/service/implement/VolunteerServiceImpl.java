@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author 11135
@@ -74,5 +75,18 @@ public class VolunteerServiceImpl implements VolunteerService {
             throw new ServiceException("没有该ID对应用户");
         }
         return volunteer;
+    }
+
+    @Override
+    public void changeFavorStatus(ObjectId userId, ObjectId activityId) {
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+        List<String> favorList = volunteer.getFavoriteActivity();
+        if (favorList.contains(activityId.toString())) {
+            favorList.remove(activityId.toString());
+        } else {
+            favorList.add(activityId.toString());
+        }
+        volunteer.setFavoriteActivity(favorList);
+        volunteerRepository.save(volunteer);
     }
 }

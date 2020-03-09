@@ -8,6 +8,8 @@ import cn.ecnuer996.volunteer.util.ResultGenerator;
 import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,17 @@ public class VolunteerController {
     @RequestMapping(value = "user-info", method = RequestMethod.GET)
     public Result getUserInfo(@RequestParam("userId") String userId) {
         return ResultGenerator.genSuccessResult(volunteerService.getVolunteerInfo(new ObjectId(userId)));
+    }
+
+    @ApiOperation("改变用户收藏活动状态")
+    @RequestMapping(value = "change-favor", method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户ID"),
+            @ApiImplicitParam(name="activityId",value = "活动ID")
+    })
+    public Result getOrganizationActivities(String userId,String activityId) {
+        volunteerService.changeFavorStatus(new ObjectId(userId),new ObjectId(activityId));
+        return ResultGenerator.genSuccessResult();
     }
 
 }
