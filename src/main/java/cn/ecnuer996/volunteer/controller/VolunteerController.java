@@ -69,4 +69,11 @@ public class VolunteerController {
         return ResultGenerator.genSuccessResult();
     }
 
+    @ApiOperation("获取用户参加过的活动列表")
+    @RequestMapping(value = "get-taken-activities", method = RequestMethod.GET)
+    @ApiImplicitParam(name = "userId",value = "用户ID")
+    public Result getTakenActivities(String userId) {
+        return ResultGenerator.genSuccessResult(volunteerService.listTakenActivities(new ObjectId(userId)));
+    }
+
 }

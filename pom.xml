@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.ecnuer996</groupId>
     <artifactId>volunteer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>volunteer</name>
     <description>a project for volunteer to sign up for volunteer activities</description>
     <packaging>jar</packaging>

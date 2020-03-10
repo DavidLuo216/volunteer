@@ -1,6 +1,9 @@
 package cn.ecnuer996.volunteer.service.implement;
 
+import cn.ecnuer996.volunteer.dao.ActivityRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
+import cn.ecnuer996.volunteer.entity.Activity;
+import cn.ecnuer996.volunteer.entity.Record;
 import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.VolunteerService;
 import cn.ecnuer996.volunteer.util.AppUtil;
@@ -13,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +26,9 @@ import java.util.List;
 @Service
 public class VolunteerServiceImpl implements VolunteerService {
     private VolunteerRepository volunteerRepository;
+
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @Autowired
     public void setVolunteerRepository(VolunteerRepository volunteerRepository) {
@@ -88,5 +96,25 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         volunteer.setFavoriteActivity(favorList);
         volunteerRepository.save(volunteer);
+    }
+
+    @Override
+    public List<HashMap> listTakenActivities(ObjectId userId) {
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+        List<Record> records = volunteer.getRecords();
+        List<ObjectId> activityIdList = new ArrayList<ObjectId>();
+        for (Record record : records) {
+            activityIdList.add(new ObjectId(record.getActivityId()));
+        }
+        List<Activity> activityList=(List<Activity>) activityRepository.findAllById(activityIdList);
+        List<HashMap> resultList=new ArrayList<HashMap>();
+        System.out.println(records.toString());
+        for (int i = 0; i < records.size(); i++) {
+            HashMap<String,Object> takenActivitiesMap=new HashMap<String,Object>();
+            takenActivitiesMap.put("activityDetail", activityList.get(i));
+            takenActivitiesMap.put("recordDetail",records.get(i));
+            resultList.add(takenActivitiesMap);
+        }
+        return resultList;
     }
 }
