@@ -76,4 +76,15 @@ public class VolunteerController {
         return ResultGenerator.genSuccessResult(volunteerService.listTakenActivities(new ObjectId(userId)));
     }
 
+    @ApiOperation("注册活动")
+    @RequestMapping(value = "register-activity", method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户ID"),
+            @ApiImplicitParam(name="activityId",value = "活动ID"),
+            @ApiImplicitParam(name="info",value = "注册信息")
+    })
+    public Result getOrganizationActivities(String userId,String activityId, String info) {
+        volunteerService.registerActivity(new ObjectId(userId),new ObjectId(activityId),info);
+        return ResultGenerator.genSuccessResult();
+    }
 }

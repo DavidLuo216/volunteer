@@ -3,6 +3,7 @@ package cn.ecnuer996.volunteer.service.implement;
 import cn.ecnuer996.volunteer.dao.ActivityRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
 import cn.ecnuer996.volunteer.entity.Activity;
+import cn.ecnuer996.volunteer.entity.Applicant;
 import cn.ecnuer996.volunteer.entity.Record;
 import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.VolunteerService;
@@ -101,20 +102,67 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public List<HashMap> listTakenActivities(ObjectId userId) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
+
         List<Record> records = volunteer.getRecords();
+        // 从records中取出对应的activityId
         List<ObjectId> activityIdList = new ArrayList<ObjectId>();
         for (Record record : records) {
             activityIdList.add(new ObjectId(record.getActivityId()));
         }
-        List<Activity> activityList=(List<Activity>) activityRepository.findAllById(activityIdList);
-        List<HashMap> resultList=new ArrayList<HashMap>();
-        System.out.println(records.toString());
+
+        // 查找activityId对应的activity
+        List<Activity> activityList = (List<Activity>) activityRepository.findAllById(activityIdList);
+        List<HashMap> resultList = new ArrayList<HashMap>();
+
+        // 把activityDetail和record放到HashMap中，再把HashMap如放入数组
         for (int i = 0; i < records.size(); i++) {
-            HashMap<String,Object> takenActivitiesMap=new HashMap<String,Object>();
+            HashMap<String, Object> takenActivitiesMap = new HashMap<String, Object>();
             takenActivitiesMap.put("activityDetail", activityList.get(i));
-            takenActivitiesMap.put("recordDetail",records.get(i));
+            takenActivitiesMap.put("recordDetail", records.get(i));
             resultList.add(takenActivitiesMap);
         }
         return resultList;
+    }
+
+    @Override
+    public void registerActivity(ObjectId userId, ObjectId activityId, String info) {
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+
+        // 判断是否注册过活动
+        List<Record> records = volunteer.getRecords();
+        Boolean registered = false;
+        for (Record record : records) {
+            if (record.getActivityId().equals(activityId.toString()) && record.getState() != "已取消") {
+                registered = true;
+            }
+        }
+        if(registered){
+            // 已注册过活动
+            throw new ServiceException("该活动已被注册");
+        }else{
+            // 未注册过活动
+            Activity activity=activityRepository.findById(activityId).get();
+            List<Applicant> applicants= activity.getApplicants();
+
+            // 给该活动添加人员记录
+            Applicant applicant=new Applicant();
+            applicant.setInfo(info);
+            applicant.setState("待审核");
+            applicant.setVolunteerId(userId.toString());
+            applicants.add(applicant);
+            activity.setApplicants(applicants);
+            activity.setApplicantNum(activity.getApplicantNum()+1);
+
+            // 给志愿者添加活动记录
+            Record record = new Record();
+            record.setActivityId(activityId.toString());
+            record.setState("待审核");
+            records.add(record);
+            volunteer.setRecords(records);
+
+            activityRepository.save(activity);
+            volunteerRepository.save(volunteer);
+        }
+
     }
 }

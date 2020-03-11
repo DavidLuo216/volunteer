@@ -4,6 +4,7 @@ package cn.ecnuer996.volunteer.service;
 import cn.ecnuer996.volunteer.entity.Activity;
 import cn.ecnuer996.volunteer.entity.Volunteer;
 import org.bson.types.ObjectId;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,4 +42,13 @@ public interface VolunteerService {
      * @return 用户报名过的项目和参与详情
      */
     List<HashMap> listTakenActivities(ObjectId userId);
+
+    /**
+     * 用户报名活动
+     * @param userId 用户ID
+     * @param activityId 活动ID
+     * @param info 审核说明
+     */
+    @Transactional(rollbackFor=Exception.class)
+    void registerActivity(ObjectId userId,ObjectId activityId, String info);
 }
