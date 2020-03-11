@@ -29,12 +29,11 @@ public class Activity {
     private List<String> images;
     private List<Applicant> applicants;
     private List<Comment> comments;
+    private String brief;
 
     public String getBrief() { return brief; }
 
     public void setBrief(String brief) { this.brief = brief; }
-
-    private String brief;
 
     public String getId() {
         return id;

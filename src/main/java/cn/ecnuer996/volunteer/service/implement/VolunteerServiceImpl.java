@@ -89,14 +89,14 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public void changeFavorStatus(ObjectId userId, ObjectId activityId) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
-        Activity activity =activityRepository.findById(activityId).get();
+        Activity activity = activityRepository.findById(activityId).get();
         List<String> favorList = volunteer.getFavoriteActivity();
         if (favorList.contains(activityId.toString())) {
             favorList.remove(activityId.toString());
-            activity.setFavoriteNum(activity.getFavoriteNum()-1);
+            activity.setFavoriteNum(activity.getFavoriteNum() - 1);
         } else {
             favorList.add(activityId.toString());
-            activity.setFavoriteNum(activity.getFavoriteNum()+1);
+            activity.setFavoriteNum(activity.getFavoriteNum() + 1);
         }
         volunteer.setFavoriteActivity(favorList);
         volunteerRepository.save(volunteer);
@@ -107,7 +107,12 @@ public class VolunteerServiceImpl implements VolunteerService {
     public List<HashMap> listTakenActivities(ObjectId userId) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
 
+        List<HashMap> resultList = new ArrayList<HashMap>();
+
         List<Record> records = volunteer.getRecords();
+        if (records == null) {
+            return resultList;
+        }
         // 从records中取出对应的activityId
         List<ObjectId> activityIdList = new ArrayList<ObjectId>();
         for (Record record : records) {
@@ -116,7 +121,6 @@ public class VolunteerServiceImpl implements VolunteerService {
 
         // 查找activityId对应的activity
         List<Activity> activityList = (List<Activity>) activityRepository.findAllById(activityIdList);
-        List<HashMap> resultList = new ArrayList<HashMap>();
 
         // 把activityDetail和record放到HashMap中，再把HashMap如放入数组
         for (int i = 0; i < records.size(); i++) {
@@ -140,22 +144,22 @@ public class VolunteerServiceImpl implements VolunteerService {
                 registered = true;
             }
         }
-        if(registered){
+        if (registered) {
             // 已注册过活动
             throw new ServiceException("该活动已被注册");
-        }else{
+        } else {
             // 未注册过活动
-            Activity activity=activityRepository.findById(activityId).get();
-            List<Applicant> applicants= activity.getApplicants();
+            Activity activity = activityRepository.findById(activityId).get();
+            List<Applicant> applicants = activity.getApplicants();
 
             // 给该活动添加人员记录
-            Applicant applicant=new Applicant();
+            Applicant applicant = new Applicant();
             applicant.setInfo(info);
             applicant.setState("待审核");
             applicant.setVolunteerId(userId.toString());
             applicants.add(applicant);
             activity.setApplicants(applicants);
-            activity.setApplicantNum(activity.getApplicantNum()+1);
+            activity.setApplicantNum(activity.getApplicantNum() + 1);
 
             // 给志愿者添加活动记录
             Record record = new Record();
