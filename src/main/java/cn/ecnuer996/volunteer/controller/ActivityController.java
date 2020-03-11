@@ -8,10 +8,7 @@ import cn.ecnuer996.volunteer.service.implement.ActivityServiceImpl;
 import cn.ecnuer996.volunteer.service.implement.VolunteerServiceImpl;
 import cn.ecnuer996.volunteer.util.Result;
 import cn.ecnuer996.volunteer.util.ResultGenerator;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +40,12 @@ public class ActivityController {
 
     @ApiOperation("获取活动详情")
     @RequestMapping(value = "activity-detail", method = RequestMethod.GET)
-    public Result getRecommendActivity(String id) {
-        return ResultGenerator.genSuccessResult(activityService.getActivityDetail(new ObjectId(id)));
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID"),
+            @ApiImplicitParam(name="activityId",value = "活动ID")
+    })
+    public Result getRecommendActivity(String userId, String activityId) {
+        return ResultGenerator.genSuccessResult(activityService.getActivityDetail(new ObjectId(activityId), new ObjectId(userId)));
     }
 
     @ApiOperation("获取某组织活动列表")

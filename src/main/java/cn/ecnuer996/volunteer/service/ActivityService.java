@@ -3,6 +3,7 @@ package cn.ecnuer996.volunteer.service;
 import cn.ecnuer996.volunteer.entity.Activity;
 import org.bson.types.ObjectId;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,10 +20,11 @@ public interface ActivityService {
 
     /**
      * 通过活动id获取活动详情
-     * @param id 活动id
-     * @return 活动详情
+     * @param activityId 活动id
+     * @param userId 用户id
+     * @return 活动详情+是否收藏
      */
-    Activity getActivityDetail(ObjectId id);
+    HashMap<String, Object> getActivityDetail(ObjectId activityId, ObjectId userId);
 
     /**
      * 通过组织id获取该组织的活动列表
