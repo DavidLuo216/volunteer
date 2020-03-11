@@ -24,7 +24,7 @@ public interface ActivityService {
      * @param userId 用户id
      * @return 活动详情+是否收藏
      */
-    HashMap<String, Object> getActivityDetail(ObjectId activityId, ObjectId userId);
+    HashMap<String, Object> getActivityDetail(String activityId, String userId);
 
     /**
      * 通过组织id获取该组织的活动列表

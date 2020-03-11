@@ -41,11 +41,11 @@ public class ActivityController {
     @ApiOperation("获取活动详情")
     @RequestMapping(value = "activity-detail", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID"),
-            @ApiImplicitParam(name="activityId",value = "活动ID")
+            @ApiImplicitParam(name = "userId", value = "用户ID",required = false),
+            @ApiImplicitParam(name="activityId",value = "活动ID", required = true)
     })
     public Result getRecommendActivity(String userId, String activityId) {
-        return ResultGenerator.genSuccessResult(activityService.getActivityDetail(new ObjectId(activityId), new ObjectId(userId)));
+        return ResultGenerator.genSuccessResult(activityService.getActivityDetail(activityId, userId));
     }
 
     @ApiOperation("获取某组织活动列表")
