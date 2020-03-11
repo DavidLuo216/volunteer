@@ -30,6 +30,12 @@ public class Activity {
     private List<Applicant> applicants;
     private List<Comment> comments;
 
+    public String getBrief() { return brief; }
+
+    public void setBrief(String brief) { this.brief = brief; }
+
+    private String brief;
+
     public String getId() {
         return id;
     }
