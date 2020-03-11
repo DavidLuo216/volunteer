@@ -34,6 +34,7 @@ public interface VolunteerService {
      * @param userId 用户id
      * @param activityId 活动id
      */
+    @Transactional(rollbackFor=Exception.class)
     void changeFavorStatus(ObjectId userId,ObjectId activityId);
 
     /**

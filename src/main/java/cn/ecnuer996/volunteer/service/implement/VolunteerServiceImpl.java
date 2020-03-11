@@ -89,14 +89,18 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public void changeFavorStatus(ObjectId userId, ObjectId activityId) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
+        Activity activity =activityRepository.findById(activityId).get();
         List<String> favorList = volunteer.getFavoriteActivity();
         if (favorList.contains(activityId.toString())) {
             favorList.remove(activityId.toString());
+            activity.setFavoriteNum(activity.getFavoriteNum()-1);
         } else {
             favorList.add(activityId.toString());
+            activity.setFavoriteNum(activity.getFavoriteNum()+1);
         }
         volunteer.setFavoriteActivity(favorList);
         volunteerRepository.save(volunteer);
+        activityRepository.save(activity);
     }
 
     @Override
