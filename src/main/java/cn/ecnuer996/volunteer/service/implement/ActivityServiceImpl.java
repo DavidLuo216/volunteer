@@ -41,9 +41,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public HashMap<String, Object> getActivityDetail(ObjectId activityId, ObjectId userId) {
-        HashMap<String, Object> resultMap = new HashMap<String, Object>(2);
+        HashMap<String, Object> resultMap = new HashMap<String, Object>(3);
+
         Activity activity = activityRepository.findById(activityId).get();
         resultMap.put("activityDetail", activity);
+        Organization organization=organizationRepository.findById(new ObjectId(activity.getOrganizationId())).get();
+        resultMap.put("organizationDetail", organization);
         Volunteer volunteer = volunteerRepository.findById(userId).get();
         List<String> favorList = volunteer.getFavoriteActivity();
         if (favorList == null) {
