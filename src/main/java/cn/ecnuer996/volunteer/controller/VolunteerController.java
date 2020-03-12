@@ -42,7 +42,7 @@ public class VolunteerController {
     @RequestMapping(value = "/wx-login", method = RequestMethod.POST)
     public @ResponseBody
     Result weixinLogIn(@RequestParam("code") String code,
-                           @RequestParam("nickName") String nickName) {
+                       @RequestParam("nickName") String nickName) {
 
         String volunteerId = volunteerService.logIn(code, nickName);
 
@@ -61,17 +61,17 @@ public class VolunteerController {
     @ApiOperation("改变用户收藏活动状态")
     @RequestMapping(value = "change-favor", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value = "用户ID"),
-            @ApiImplicitParam(name="activityId",value = "活动ID")
+            @ApiImplicitParam(name = "userId", value = "用户ID"),
+            @ApiImplicitParam(name = "activityId", value = "活动ID")
     })
-    public Result getOrganizationActivities(String userId,String activityId) {
-        volunteerService.changeFavorStatus(new ObjectId(userId),new ObjectId(activityId));
+    public Result getOrganizationActivities(String userId, String activityId) {
+        volunteerService.changeFavorStatus(new ObjectId(userId), new ObjectId(activityId));
         return ResultGenerator.genSuccessResult();
     }
 
     @ApiOperation("获取用户参加过的活动列表")
     @RequestMapping(value = "get-taken-activities", method = RequestMethod.GET)
-    @ApiImplicitParam(name = "userId",value = "用户ID")
+    @ApiImplicitParam(name = "userId", value = "用户ID")
     public Result getTakenActivities(String userId) {
         return ResultGenerator.genSuccessResult(volunteerService.listTakenActivities(new ObjectId(userId)));
     }
@@ -79,12 +79,22 @@ public class VolunteerController {
     @ApiOperation("注册活动")
     @RequestMapping(value = "register-activity", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value = "用户ID"),
-            @ApiImplicitParam(name="activityId",value = "活动ID"),
-            @ApiImplicitParam(name="info",value = "注册信息")
+            @ApiImplicitParam(name = "userId", value = "用户ID"),
+            @ApiImplicitParam(name = "activityId", value = "活动ID"),
+            @ApiImplicitParam(name = "info", value = "注册信息")
     })
-    public Result getOrganizationActivities(String userId,String activityId, String info) {
-        volunteerService.registerActivity(new ObjectId(userId),new ObjectId(activityId),info);
+    public Result getOrganizationActivities(String userId, String activityId, String info) {
+        volunteerService.registerActivity(new ObjectId(userId), new ObjectId(activityId), info);
         return ResultGenerator.genSuccessResult();
+    }
+
+    @ApiOperation("获取用户参加过的活动详情")
+    @RequestMapping(value = "get-taken-activities", method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "activityId", value = "活动ID"),
+            @ApiImplicitParam(name = "userId", value = "用户ID")
+    })
+    public Result getTakenActivityDetail(String activityId, String userId) {
+        return ResultGenerator.genSuccessResult(volunteerService.getTakenActivityDetail(activityId, userId));
     }
 }

@@ -52,4 +52,13 @@ public interface VolunteerService {
      */
     @Transactional(rollbackFor=Exception.class)
     void registerActivity(ObjectId userId,ObjectId activityId, String info);
+
+
+    /**
+     * 查询报名的详情
+     * @param activityId 活动id
+     * @param userId 用户id
+     * @return 报名详情和活动详情
+     */
+    HashMap<String, Object> getTakenActivityDetail(String activityId, String userId);
 }

@@ -32,4 +32,5 @@ public interface ActivityService {
      * @return 活动列表
      */
     List<Activity> listActivitiesByOrganizationId(ObjectId id);
+
 }

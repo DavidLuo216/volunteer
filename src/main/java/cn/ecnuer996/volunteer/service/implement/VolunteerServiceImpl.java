@@ -175,6 +175,24 @@ public class VolunteerServiceImpl implements VolunteerService {
             activityRepository.save(activity);
             volunteerRepository.save(volunteer);
         }
+    }
 
+    @Override
+    public HashMap<String, Object> getTakenActivityDetail(String activityId, String userId) {
+        HashMap<String, Object> resultMap = new HashMap<String, Object>(2);
+
+        Volunteer volunteer = volunteerRepository.findById(new ObjectId(userId)).get();
+        Activity activity = activityRepository.findById(new ObjectId(activityId)).get();
+
+        resultMap.put("activityDetail", activity);
+
+        List<Record> records = volunteer.getRecords();
+        for (Record record : records) {
+            if (record.getActivityId().equals(activityId)) {
+                resultMap.put("recordDetail", record);
+                break;
+            }
+        }
+        return resultMap;
     }
 }
