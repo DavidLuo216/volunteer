@@ -89,7 +89,7 @@ public class VolunteerController {
     }
 
     @ApiOperation("获取用户参加过的活动详情")
-    @RequestMapping(value = "get-taken-activities", method = RequestMethod.GET)
+    @RequestMapping(value = "get-taken-activity-detail", method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "activityId", value = "活动ID"),
             @ApiImplicitParam(name = "userId", value = "用户ID")
