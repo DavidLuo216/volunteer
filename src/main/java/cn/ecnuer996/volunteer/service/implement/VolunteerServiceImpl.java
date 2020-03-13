@@ -9,6 +9,7 @@ import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.VolunteerService;
 import cn.ecnuer996.volunteer.util.AppUtil;
 import cn.ecnuer996.volunteer.util.ServiceException;
+import cn.ecnuer996.volunteer.util.TimeUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
 import org.bson.types.ObjectId;
@@ -16,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -130,6 +134,13 @@ public class VolunteerServiceImpl implements VolunteerService {
             HashMap<String, Object> takenActivitiesMap = new HashMap<String, Object>();
             takenActivitiesMap.put("activityDetail", activityList.get(i));
             takenActivitiesMap.put("recordDetail", records.get(i));
+            LocalDateTime localTime = LocalDateTime.now();
+            LocalDateTime activityTime=activityList.get(i).getBeginTime();
+            if(localTime.isBefore(activityTime)){
+                takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime,activityTime)+"天后开始");
+            }else {
+                takenActivitiesMap.put("dateStatus", "已结束");
+            }
             resultList.add(takenActivitiesMap);
         }
         return resultList;
