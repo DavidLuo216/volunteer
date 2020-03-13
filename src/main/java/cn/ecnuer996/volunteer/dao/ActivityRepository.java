@@ -19,4 +19,11 @@ public interface ActivityRepository extends MongoRepository<Activity, ObjectId> 
      */
     @Query("{tags:{$all:?0} }")
     List<Activity> findByTagsAll(List<String> tags);
+
+    /**
+     * 根据活动名称模糊查询活动
+     * @param title 活动名称
+     * @return 活动列表
+     */
+    List<Activity> findByTitleLike(String title);
 }

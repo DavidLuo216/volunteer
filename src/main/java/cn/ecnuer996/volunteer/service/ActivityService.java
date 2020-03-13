@@ -33,4 +33,11 @@ public interface ActivityService {
      */
     List<Activity> listActivitiesByOrganizationId(ObjectId id);
 
+    /**
+     * 根据活动名称模糊查询活动
+     * @param title 活动名称
+     * @return 活动列表
+     */
+    List<Activity> findByTitleLike(String title);
+
 }

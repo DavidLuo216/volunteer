@@ -54,4 +54,11 @@ public class ActivityController {
     public Result getOrganizationActivities(String id) {
         return ResultGenerator.genSuccessResult(activityService.listActivitiesByOrganizationId(new ObjectId(id)));
     }
+
+    @ApiOperation("根据活动名称模糊查询活动")
+    @RequestMapping(value = "search-activities", method = RequestMethod.GET)
+    @ApiImplicitParam(name = "title",value = "活动名称")
+    public Result getActivityListByTitle(String title) {
+        return ResultGenerator.genSuccessResult(activityService.findByTitleLike(title));
+    }
 }

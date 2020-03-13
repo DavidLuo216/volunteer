@@ -73,4 +73,9 @@ public class ActivityServiceImpl implements ActivityService {
         System.out.println();
         return (List<Activity>) activityRepository.findAllById(ObjectIdList);
     }
+
+    @Override
+    public List<Activity> findByTitleLike(String title) {
+        return activityRepository.findByTitleLike(title);
+    }
 }
