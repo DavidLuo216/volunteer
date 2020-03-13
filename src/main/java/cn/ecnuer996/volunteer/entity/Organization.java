@@ -20,6 +20,16 @@ public class Organization {
     private Integer favoriteNum;
     private List<String> essays;
     private List<String> activities;
+    private String contact;
+    private String phone;
+
+    public String getContact() { return contact; }
+
+    public void setContact(String contact) { this.contact = contact; }
+
+    public String getPhone() { return phone; }
+
+    public void setPhone(String phone) { this.phone = phone; }
 
     public String getId() {
         return id;
