@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -66,12 +67,27 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> listActivitiesByOrganizationId(ObjectId id) {
+    public HashMap<String,Object> listActivitiesByOrganizationId(ObjectId id) {
+        HashMap<String,Object> resultMap=new HashMap<String, Object>(2);
+        List<Activity> currentActivityList=new ArrayList<Activity>();
+        List<Activity> oldActivityList=new ArrayList<Activity>();
+
         Organization organization = organizationRepository.findById(id).get();
         List<ObjectId> ObjectIdList = MongoUtil.toObjectIdList(organization.getActivities());
-        System.out.println(ObjectIdList);
-        System.out.println();
-        return (List<Activity>) activityRepository.findAllById(ObjectIdList);
+        List<Activity> allActivityList=(List<Activity>) activityRepository.findAllById(ObjectIdList);
+
+        for (Activity activity: allActivityList) {
+            if(activity.getState().equals("已结束")){
+                oldActivityList.add(activity);
+            }else {
+                currentActivityList.add(activity);
+            }
+        }
+
+        resultMap.put("currentActivityList",currentActivityList);
+        resultMap.put("oldActivityList",oldActivityList);
+
+        return resultMap;
     }
 
     @Override

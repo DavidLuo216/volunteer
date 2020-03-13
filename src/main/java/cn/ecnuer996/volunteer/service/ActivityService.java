@@ -29,9 +29,9 @@ public interface ActivityService {
     /**
      * 通过组织id获取该组织的活动列表
      * @param id 组织id
-     * @return 活动列表
+     * @return 活动列表（当前和已结束两个list）
      */
-    List<Activity> listActivitiesByOrganizationId(ObjectId id);
+    HashMap<String,Object> listActivitiesByOrganizationId(ObjectId id);
 
     /**
      * 根据活动名称模糊查询活动
