@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/VolunteerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/entity/Comment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +134,8 @@
       <workItem from="1583921259470" duration="108000" />
       <workItem from="1583941911493" duration="3568000" />
       <workItem from="1583999333706" duration="1879000" />
-      <workItem from="1584007378370" duration="1019000" />
+      <workItem from="1584007378370" duration="2328000" />
+      <workItem from="1584079221315" duration="242000" />
     </task>
     <task id="LOCAL-00001" summary="initialization of this project.">
       <created>1578554430766</created>
@@ -354,5 +351,16 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="752" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050@0.0.1920.1050" timestamp="1578554099304" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/VolunteerController.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
