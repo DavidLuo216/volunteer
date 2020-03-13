@@ -8,7 +8,6 @@ import cn.ecnuer996.volunteer.entity.Record;
 import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.VolunteerService;
 import cn.ecnuer996.volunteer.util.AppUtil;
-import cn.ecnuer996.volunteer.util.ResultGenerator;
 import cn.ecnuer996.volunteer.util.ServiceException;
 import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -139,15 +138,10 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public void registerActivity(ObjectId userId, ObjectId activityId, String info) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
-
-        // 判断是否注册过活动
         List<Record> records = volunteer.getRecords();
-        Boolean registered = false;
-        for (Record record : records) {
-            if (record.getActivityId().equals(activityId.toString()) && record.getState() != "已取消") {
-                registered = true;
-            }
-        }
+
+        Boolean registered = volunteer.isRegistered(activityId.toString());
+
         if (registered) {
             // 已注册过活动
             throw new ServiceException("该活动已被注册");

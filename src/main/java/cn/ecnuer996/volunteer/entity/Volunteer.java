@@ -1,5 +1,8 @@
 package cn.ecnuer996.volunteer.entity;
 
+import cn.ecnuer996.volunteer.dao.VolunteerRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,6 +27,18 @@ public class Volunteer {
     private List<String> favoriteOrg;
     private List<String> favoriteActivity;
     private List<Record> records;
+
+
+    public Boolean isRegistered(String activityId) {
+        List<Record> records = this.records;
+        if(records==null){
+            return false;
+        }
+        for (Record record : records) {
+            return record.getActivityId().equals(activityId) && !record.getState().equals("已取消");
+        }
+        return false;
+    }
 
     public String getId() {
         return id;
