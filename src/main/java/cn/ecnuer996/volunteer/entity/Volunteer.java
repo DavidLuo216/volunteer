@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,13 +43,27 @@ public class Volunteer {
         return false;
     }
 
-    public String getSchoolId() { return schoolId; }
+    public Volunteer() {
+        this.favoriteOrg = new ArrayList<String>();
+        this.favoriteActivity = new ArrayList<String>();
+        this.records = new ArrayList<Record>();
+    }
 
-    public void setSchoolId(String schoolId) { this.schoolId = schoolId; }
+    public String getSchoolId() {
+        return schoolId;
+    }
 
-    public String getPhone() { return phone; }
+    public void setSchoolId(String schoolId) {
+        this.schoolId = schoolId;
+    }
 
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getId() {
         return id;
