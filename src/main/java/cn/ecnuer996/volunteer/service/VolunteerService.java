@@ -72,4 +72,11 @@ public interface VolunteerService {
      * @param phone 电话
      */
     void updateVolunteerInfo(ObjectId userId, String nickName,String name,String school,String schoolId,String phone);
+
+    /**
+     * 获取收藏活动列表
+     * @param userId 用户id
+     * @return 收藏活动列表
+     */
+    List<Activity> listFavoriteActivities(ObjectId userId);
 }

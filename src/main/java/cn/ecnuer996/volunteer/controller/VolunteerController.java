@@ -107,4 +107,11 @@ public class VolunteerController {
         volunteerService.updateVolunteerInfo(new ObjectId(userId), nickName, name, school, schoolId, phone);
         return ResultGenerator.genSuccessResult();
     }
+
+    @ApiOperation("获取用户收藏过的活动列表")
+    @RequestMapping(value = "list-favorite-activities", method = RequestMethod.GET)
+    @ApiImplicitParam(name = "userId", value = "用户ID")
+    public Result listFavoriteActivities(String userId) {
+        return ResultGenerator.genSuccessResult(volunteerService.listFavoriteActivities(new ObjectId(userId)));
+    }
 }

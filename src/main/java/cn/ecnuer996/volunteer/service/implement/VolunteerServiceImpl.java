@@ -8,6 +8,7 @@ import cn.ecnuer996.volunteer.entity.Record;
 import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.VolunteerService;
 import cn.ecnuer996.volunteer.util.AppUtil;
+import cn.ecnuer996.volunteer.util.MongoUtil;
 import cn.ecnuer996.volunteer.util.ServiceException;
 import cn.ecnuer996.volunteer.util.TimeUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -192,12 +193,25 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Override
     public void updateVolunteerInfo(ObjectId userId, String nickName, String name, String school, String schoolId, String phone) {
-        Volunteer volunteer =volunteerRepository.findById(userId).get();
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
         volunteer.setNickname(nickName);
         volunteer.setName(name);
         volunteer.setSchool(school);
         volunteer.setSchoolId(schoolId);
         volunteer.setPhone(phone);
         volunteerRepository.save(volunteer);
+    }
+
+    @Override
+    public List<Activity> listFavoriteActivities(ObjectId userId) {
+        List<String> activityIdList = volunteerRepository.findById(userId).get().getFavoriteActivity();
+
+        if (activityIdList == null) {
+            return new ArrayList<>();
+        } else {
+            List<ObjectId> activityObjIdList = MongoUtil.toObjectIdList(activityIdList);
+            List<Activity> activityList = (List<Activity>) activityRepository.findAllById(activityObjIdList);
+            return activityList;
+        }
     }
 }
