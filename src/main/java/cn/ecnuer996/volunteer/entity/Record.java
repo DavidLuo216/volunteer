@@ -9,7 +9,6 @@ public class Record implements Comparable {
     private String certificate;
     private Double score;
 
-
     public String getActivityId() {
         return activityId;
     }
@@ -44,7 +43,7 @@ public class Record implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        if ("待审核".equals(this.getState()) || "待参加".equals(this.getState())) {
+        if ("待审核".equals(this.getState()) || "已通过".equals(this.getState())) {
             return -1;
         } else {
             return 1;

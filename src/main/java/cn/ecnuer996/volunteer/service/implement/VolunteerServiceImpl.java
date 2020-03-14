@@ -26,15 +26,11 @@ import java.util.*;
  */
 @Service
 public class VolunteerServiceImpl implements VolunteerService {
+    @Autowired
     private VolunteerRepository volunteerRepository;
 
     @Autowired
     private ActivityRepository activityRepository;
-
-    @Autowired
-    public void setVolunteerRepository(VolunteerRepository volunteerRepository) {
-        this.volunteerRepository = volunteerRepository;
-    }
 
     @Override
     public String logIn(@NotNull String code, @NotNull String nickname) {
@@ -44,8 +40,9 @@ public class VolunteerServiceImpl implements VolunteerService {
         String openid;
         String sessionKey;
         try {
-            HttpRequest request = HttpRequest.get(AppUtil.WX_LOGIN_URL, true,
-                    "appid", AppUtil.APP_ID, "secret", AppUtil.APP_SECRET, "js_code", code, "grant_type", "authorization_code");
+            HttpRequest request = HttpRequest
+                    .get(AppUtil.WX_LOGIN_URL, true, "appid", AppUtil.APP_ID, "secret", AppUtil.APP_SECRET, "js_code", code,
+                            "grant_type", "authorization_code");
             String body = request.body();
             JSONObject obj = JSONObject.parseObject(body);
             if (obj.getString(KEY_OPENID) == null) {
@@ -115,28 +112,22 @@ public class VolunteerServiceImpl implements VolunteerService {
 
         List<Record> records = volunteer.getRecords();
         Collections.sort(records);
+
         if (records == null) {
             return resultList;
         }
-        // 从records中取出对应的activityId
-        List<ObjectId> activityIdList = new ArrayList<ObjectId>();
-        for (Record record : records) {
-            activityIdList.add(new ObjectId(record.getActivityId()));
-        }
 
-        // 查找activityId对应的activity
-        List<Activity> activityList = (List<Activity>) activityRepository.findAllById(activityIdList);
-
-        // 把activityDetail和record放到HashMap中，再把HashMap如放入数组
         for (int i = 0; i < records.size(); i++) {
             HashMap<String, Object> takenActivitiesMap = new HashMap<String, Object>();
-            takenActivitiesMap.put("activityDetail", activityList.get(i));
+            Activity activity = activityRepository.findById(new ObjectId(records.get(i).getActivityId())).get();
+            takenActivitiesMap
+                    .put("activityDetail", activity);
             takenActivitiesMap.put("recordDetail", records.get(i));
             LocalDateTime localTime = LocalDateTime.now();
-            LocalDateTime activityTime=activityList.get(i).getBeginTime();
-            if(localTime.isBefore(activityTime)){
-                takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime,activityTime)+"天后开始");
-            }else {
+            LocalDateTime activityTime = activity.getBeginTime();
+            if (localTime.isBefore(activityTime)) {
+                takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime, activityTime) + "天后开始");
+            } else {
                 takenActivitiesMap.put("dateStatus", "已结束");
             }
             resultList.add(takenActivitiesMap);
