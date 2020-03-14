@@ -97,4 +97,14 @@ public class VolunteerController {
     public Result getTakenActivityDetail(String activityId, String userId) {
         return ResultGenerator.genSuccessResult(volunteerService.getTakenActivityDetail(activityId, userId));
     }
+
+    @ApiOperation("修改志愿者实名信息")
+    @RequestMapping(value = "/update-volunteer-info", method = RequestMethod.POST)
+    public @ResponseBody
+    Result updateVolunteerInfo(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName,
+                               @RequestParam("name") String name, @RequestParam("school") String school,
+                               @RequestParam("schoolId") String schoolId,@RequestParam("phone") String phone) {
+        volunteerService.updateVolunteerInfo(new ObjectId(userId), nickName, name, school, schoolId, phone);
+        return ResultGenerator.genSuccessResult();
+    }
 }

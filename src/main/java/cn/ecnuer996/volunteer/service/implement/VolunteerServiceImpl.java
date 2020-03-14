@@ -189,4 +189,15 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         return resultMap;
     }
+
+    @Override
+    public void updateVolunteerInfo(ObjectId userId, String nickName, String name, String school, String schoolId, String phone) {
+        Volunteer volunteer =volunteerRepository.findById(userId).get();
+        volunteer.setNickname(nickName);
+        volunteer.setName(name);
+        volunteer.setSchool(school);
+        volunteer.setSchoolId(schoolId);
+        volunteer.setPhone(phone);
+        volunteerRepository.save(volunteer);
+    }
 }

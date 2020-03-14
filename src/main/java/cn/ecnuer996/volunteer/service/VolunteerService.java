@@ -61,4 +61,15 @@ public interface VolunteerService {
      * @return 报名详情和活动详情
      */
     HashMap<String, Object> getTakenActivityDetail(String activityId, String userId);
+
+    /**
+     * 更新用户实名信息
+     * @param userId 用户id
+     * @param nickName 昵称
+     * @param name 真实姓名
+     * @param school 消息名称
+     * @param schoolId 学号
+     * @param phone 电话
+     */
+    void updateVolunteerInfo(ObjectId userId, String nickName,String name,String school,String schoolId,String phone);
 }

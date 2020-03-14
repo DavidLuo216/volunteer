@@ -29,6 +29,7 @@ public class Volunteer {
     private List<String> favoriteActivity;
     private List<Record> records;
     private String phone;
+    private String schoolId;
 
     public Boolean isRegistered(String activityId) {
         List<Record> records = this.records;
@@ -40,6 +41,10 @@ public class Volunteer {
         }
         return false;
     }
+
+    public String getSchoolId() { return schoolId; }
+
+    public void setSchoolId(String schoolId) { this.schoolId = schoolId; }
 
     public String getPhone() { return phone; }
 

@@ -45,10 +45,10 @@ public class Record implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        if (StateCode.WAITING_APPROVE.equals(this.getState()) || StateCode.PASSED.equals(this.getState())) {
-            return 1;
-        } else {
+        if (StateCode.WAITING_APPROVE.state().equals(this.getState()) || StateCode.PASSED.state().equals(this.getState())) {
             return -1;
+        } else {
+            return 1;
         }
     }
 }
