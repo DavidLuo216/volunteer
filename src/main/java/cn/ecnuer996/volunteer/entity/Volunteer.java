@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Document(value = "volunteer")
 public class Volunteer {
+
     @Id
     private String id;
     private String openid;
@@ -27,11 +28,11 @@ public class Volunteer {
     private List<String> favoriteOrg;
     private List<String> favoriteActivity;
     private List<Record> records;
-
+    private String phone;
 
     public Boolean isRegistered(String activityId) {
         List<Record> records = this.records;
-        if(records==null){
+        if (records == null) {
             return false;
         }
         for (Record record : records) {
@@ -39,6 +40,10 @@ public class Volunteer {
         }
         return false;
     }
+
+    public String getPhone() { return phone; }
+
+    public void setPhone(String phone) { this.phone = phone; }
 
     public String getId() {
         return id;
