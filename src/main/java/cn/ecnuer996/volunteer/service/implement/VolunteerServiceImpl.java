@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 11135
@@ -117,6 +114,7 @@ public class VolunteerServiceImpl implements VolunteerService {
         List<HashMap> resultList = new ArrayList<HashMap>();
 
         List<Record> records = volunteer.getRecords();
+        Collections.sort(records);
         if (records == null) {
             return resultList;
         }
