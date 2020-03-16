@@ -35,9 +35,14 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<Activity> listRecommendActivities(List<String> tags) {
-        List<Activity> activityList;
-        activityList = activityRepository.findByTagsAll(tags);
-        return activityList;
+        List<Activity> resultList = new ArrayList<Activity>();
+        List<Activity> activityList = activityRepository.findByTagsAll(tags);
+        for (Activity activity: activityList) {
+            if(activity.getState().equals("招募中")){
+                resultList.add(activity);
+            }
+        }
+        return resultList;
     }
 
     @Override
