@@ -61,4 +61,10 @@ public class ActivityController {
     public Result getActivityListByTitle(String title) {
         return ResultGenerator.genSuccessResult(activityService.findByTitleLike(title));
     }
+
+    @ApiOperation("获取所有活动")
+    @RequestMapping(value = "list-all-activities", method = RequestMethod.GET)
+    public Result listAllActvities() {
+        return ResultGenerator.genSuccessResult(activityService.listActivities());
+    }
 }

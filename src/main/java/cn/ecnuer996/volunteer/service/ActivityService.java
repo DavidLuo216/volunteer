@@ -40,4 +40,10 @@ public interface ActivityService {
      */
     List<Activity> findByTitleLike(String title);
 
+    /**
+     * 获取全部活动
+     * @return 活动列表
+     */
+    List<Activity> listActivities();
+
 }

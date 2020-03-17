@@ -9,8 +9,10 @@ import cn.ecnuer996.volunteer.entity.Volunteer;
 import cn.ecnuer996.volunteer.service.ActivityService;
 import cn.ecnuer996.volunteer.util.MongoUtil;
 import cn.ecnuer996.volunteer.util.ServiceException;
+import net.bytebuddy.asm.Advice;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,8 +39,8 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> listRecommendActivities(List<String> tags) {
         List<Activity> resultList = new ArrayList<Activity>();
         List<Activity> activityList = activityRepository.findByTagsAll(tags);
-        for (Activity activity: activityList) {
-            if(activity.getState().equals("招募中")){
+        for (Activity activity : activityList) {
+            if (activity.getState().equals("招募中")) {
                 resultList.add(activity);
             }
         }
@@ -59,7 +61,7 @@ public class ActivityServiceImpl implements ActivityService {
             resultMap.put("isFavor", false);
         } else {
             Volunteer volunteer = volunteerRepository.findById(new ObjectId(userIdS)).get();
-            resultMap.put("hasRegistered",volunteer.isRegistered(activityIdS));
+            resultMap.put("hasRegistered", volunteer.isRegistered(activityIdS));
             List<String> favorList = volunteer.getFavoriteActivity();
             if (favorList == null) {
                 resultMap.put("isFavor", false);
@@ -74,25 +76,25 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public HashMap<String,Object> listActivitiesByOrganizationId(ObjectId id) {
-        HashMap<String,Object> resultMap=new HashMap<String, Object>(2);
-        List<Activity> currentActivityList=new ArrayList<Activity>();
-        List<Activity> oldActivityList=new ArrayList<Activity>();
+    public HashMap<String, Object> listActivitiesByOrganizationId(ObjectId id) {
+        HashMap<String, Object> resultMap = new HashMap<String, Object>(2);
+        List<Activity> currentActivityList = new ArrayList<Activity>();
+        List<Activity> oldActivityList = new ArrayList<Activity>();
 
         Organization organization = organizationRepository.findById(id).get();
         List<ObjectId> ObjectIdList = MongoUtil.toObjectIdList(organization.getActivities());
-        List<Activity> allActivityList=(List<Activity>) activityRepository.findAllById(ObjectIdList);
+        List<Activity> allActivityList = (List<Activity>) activityRepository.findAllById(ObjectIdList);
 
-        for (Activity activity: allActivityList) {
-            if(activity.getState().equals("已结束")){
+        for (Activity activity : allActivityList) {
+            if (activity.getState().equals("已结束")) {
                 oldActivityList.add(activity);
-            }else {
+            } else {
                 currentActivityList.add(activity);
             }
         }
 
-        resultMap.put("currentActivityList",currentActivityList);
-        resultMap.put("oldActivityList",oldActivityList);
+        resultMap.put("currentActivityList", currentActivityList);
+        resultMap.put("oldActivityList", oldActivityList);
 
         return resultMap;
     }
@@ -100,5 +102,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> findByTitleLike(String title) {
         return activityRepository.findByTitleLike(title);
+    }
+
+    @Override
+    public List<Activity> listActivities() {
+        return activityRepository.findAll(Sort.by(Sort.Direction.DESC,"beginTime"));
     }
 }
