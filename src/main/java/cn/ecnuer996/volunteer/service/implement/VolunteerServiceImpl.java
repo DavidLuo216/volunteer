@@ -2,10 +2,7 @@ package cn.ecnuer996.volunteer.service.implement;
 
 import cn.ecnuer996.volunteer.dao.ActivityRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
-import cn.ecnuer996.volunteer.entity.Activity;
-import cn.ecnuer996.volunteer.entity.Applicant;
-import cn.ecnuer996.volunteer.entity.Record;
-import cn.ecnuer996.volunteer.entity.Volunteer;
+import cn.ecnuer996.volunteer.entity.*;
 import cn.ecnuer996.volunteer.service.VolunteerService;
 import cn.ecnuer996.volunteer.util.AppUtil;
 import cn.ecnuer996.volunteer.util.MongoUtil;
@@ -213,5 +210,25 @@ public class VolunteerServiceImpl implements VolunteerService {
             List<Activity> activityList = (List<Activity>) activityRepository.findAllById(activityObjIdList);
             return activityList;
         }
+    }
+
+    @Override
+    public void saveComment(ObjectId userId, ObjectId activityId, String commentDetail) {
+        Activity activity = activityRepository.findById(activityId).get();
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+
+        Comment comment = new Comment();
+        comment.setAvatar(volunteer.getAvatar());
+        comment.setNickName(volunteer.getNickname());
+        comment.setVolunteerId(volunteer.getId());
+        comment.setContent(commentDetail);
+        comment.setDate(new Date());
+
+        List<Comment> commentList=activity.getComments();
+        commentList.add(comment);
+        activity.setComments(commentList);
+
+        activityRepository.save(activity);
+
     }
 }

@@ -79,4 +79,13 @@ public interface VolunteerService {
      * @return 收藏活动列表
      */
     List<Activity> listFavoriteActivities(ObjectId userId);
+
+    /**
+     * 发表评论
+     * @param userId 用户id
+     * @param activityId 活动id
+     * @param comment 评论内容
+     */
+    @Transactional(rollbackFor = Exception.class)
+    void saveComment(ObjectId userId,ObjectId activityId,String comment);
 }

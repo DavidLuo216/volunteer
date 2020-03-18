@@ -103,7 +103,7 @@ public class VolunteerController {
     public @ResponseBody
     Result updateVolunteerInfo(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName,
                                @RequestParam("name") String name, @RequestParam("school") String school,
-                               @RequestParam("schoolId") String schoolId,@RequestParam("phone") String phone) {
+                               @RequestParam("schoolId") String schoolId, @RequestParam("phone") String phone) {
         volunteerService.updateVolunteerInfo(new ObjectId(userId), nickName, name, school, schoolId, phone);
         return ResultGenerator.genSuccessResult();
     }
@@ -113,5 +113,14 @@ public class VolunteerController {
     @ApiImplicitParam(name = "userId", value = "用户ID")
     public Result listFavoriteActivities(String userId) {
         return ResultGenerator.genSuccessResult(volunteerService.listFavoriteActivities(new ObjectId(userId)));
+    }
+
+    @ApiOperation("发表评论")
+    @RequestMapping(value = "/save-comment", method = RequestMethod.POST)
+    public @ResponseBody
+    Result updateVolunteerInfo(@RequestParam("userId") String userId, @RequestParam("activityId") String activityId,
+                               @RequestParam("content") String content) {
+        volunteerService.saveComment(new ObjectId(userId), new ObjectId(activityId), content);
+        return ResultGenerator.genSuccessResult();
     }
 }
