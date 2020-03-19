@@ -185,6 +185,15 @@ public class VolunteerServiceImpl implements VolunteerService {
                 break;
             }
         }
+
+        List<Applicant> applicantList= activity.getApplicants();
+        for (Applicant applicant: applicantList) {
+            if(applicant.getVolunteerId().equals(userId)){
+                resultMap.put("registerInfo", applicant.getInfo());
+                break;
+            }
+        }
+
         return resultMap;
     }
 
