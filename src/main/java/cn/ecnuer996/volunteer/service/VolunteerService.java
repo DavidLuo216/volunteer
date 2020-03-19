@@ -88,4 +88,12 @@ public interface VolunteerService {
      */
     @Transactional(rollbackFor = Exception.class)
     void saveComment(ObjectId userId,ObjectId activityId,String comment);
+
+    /**
+     * 用户取消注册
+     * @param userId  用户id
+     * @param activityId 活动id
+     */
+    @Transactional(rollbackFor = Exception.class)
+    void removeActivityRegistration(ObjectId userId,ObjectId activityId);
 }

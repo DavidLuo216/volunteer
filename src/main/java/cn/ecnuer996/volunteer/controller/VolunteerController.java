@@ -123,4 +123,12 @@ public class VolunteerController {
         volunteerService.saveComment(new ObjectId(userId), new ObjectId(activityId), content);
         return ResultGenerator.genSuccessResult();
     }
+
+    @ApiOperation("取消报名")
+    @RequestMapping(value = "/cancel-registration", method = RequestMethod.GET)
+    public @ResponseBody
+    Result cancelRegistration(@RequestParam("userId") String userId, @RequestParam("activityId") String activityId) {
+        volunteerService.removeActivityRegistration(new ObjectId(userId), new ObjectId(activityId));
+        return ResultGenerator.genSuccessResult();
+    }
 }

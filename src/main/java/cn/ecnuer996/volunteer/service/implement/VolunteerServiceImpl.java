@@ -231,4 +231,32 @@ public class VolunteerServiceImpl implements VolunteerService {
         activityRepository.save(activity);
 
     }
+
+    @Override
+    public void removeActivityRegistration(ObjectId userId, ObjectId activityId) {
+        Volunteer volunteer =volunteerRepository.findById(userId).get();
+        Activity activity=activityRepository.findById(activityId).get();
+
+        List<Record> recordList=volunteer.getRecords();
+        for ( Record record: recordList) {
+            if (record.getActivityId().equals(activityId.toHexString())){
+                recordList.remove(record);
+                break;
+            }
+        }
+        volunteer.setRecords(recordList);
+
+        activity.setApplicantNum(activity.getApplicantNum()-1);
+        List<Applicant> applicantList = activity.getApplicants();
+        for (Applicant applicant: applicantList) {
+            if(applicant.getVolunteerId().equals(userId.toString())){
+                applicantList.remove(applicant);
+                break;
+            }
+        }
+        activity.setApplicants(applicantList);
+
+        activityRepository.save(activity);
+        volunteerRepository.save(volunteer);
+    }
 }
