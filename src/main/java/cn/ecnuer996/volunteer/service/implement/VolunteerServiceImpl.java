@@ -4,10 +4,7 @@ import cn.ecnuer996.volunteer.dao.ActivityRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
 import cn.ecnuer996.volunteer.entity.*;
 import cn.ecnuer996.volunteer.service.VolunteerService;
-import cn.ecnuer996.volunteer.util.AppUtil;
-import cn.ecnuer996.volunteer.util.MongoUtil;
-import cn.ecnuer996.volunteer.util.ServiceException;
-import cn.ecnuer996.volunteer.util.TimeUtil;
+import cn.ecnuer996.volunteer.util.*;
 import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
 import org.bson.types.ObjectId;
@@ -151,7 +148,7 @@ public class VolunteerServiceImpl implements VolunteerService {
             // 给该活动添加人员记录
             Applicant applicant = new Applicant();
             applicant.setInfo(info);
-            applicant.setState("待审核");
+            applicant.setState(StateCode.WAITING_APPROVE.state());
             applicant.setVolunteerId(userId.toString());
             applicants.add(applicant);
             activity.setApplicants(applicants);
@@ -160,7 +157,7 @@ public class VolunteerServiceImpl implements VolunteerService {
             // 给志愿者添加活动记录
             Record record = new Record();
             record.setActivityId(activityId.toString());
-            record.setState("待审核");
+            record.setState(StateCode.WAITING_APPROVE.state());
             records.add(record);
             volunteer.setRecords(records);
 
@@ -229,7 +226,7 @@ public class VolunteerServiceImpl implements VolunteerService {
         List<Record> recordList=volunteer.getRecords();
         for (Record record: recordList) {
             if(record.getActivityId().equals(activityId.toString())){
-                record.setState("已评价");
+                record.setState(StateCode.COMMENTED.state());
                 break;
             }
         }

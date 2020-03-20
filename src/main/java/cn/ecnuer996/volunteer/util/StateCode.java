@@ -8,7 +8,7 @@ public enum StateCode {
 
     PASSED("已通过"),
 
-    CANCELED("已取消"),
+//    CANCELED("已取消"),
 
     WAITING_COMMENT("待评价"),
 
