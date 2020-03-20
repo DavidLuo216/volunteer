@@ -3,12 +3,11 @@ package cn.ecnuer996.volunteer.service.implement;
 import cn.ecnuer996.volunteer.dao.ActivityRepository;
 import cn.ecnuer996.volunteer.dao.OrganizationRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
-import cn.ecnuer996.volunteer.entity.Activity;
-import cn.ecnuer996.volunteer.entity.Organization;
-import cn.ecnuer996.volunteer.entity.Volunteer;
+import cn.ecnuer996.volunteer.entity.*;
 import cn.ecnuer996.volunteer.service.ActivityService;
 import cn.ecnuer996.volunteer.util.MongoUtil;
 import cn.ecnuer996.volunteer.util.ServiceException;
+import cn.ecnuer996.volunteer.util.StateCode;
 import net.bytebuddy.asm.Advice;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +106,32 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> listActivities() {
         return activityRepository.findAll(Sort.by(Sort.Direction.DESC,"beginTime"));
+    }
+
+    @Override
+    public void passRegistration(ObjectId userId, ObjectId activityId) {
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+        Activity activity = activityRepository.findById(activityId).get();
+        List<Record> recordList=volunteer.getRecords();
+        List<Applicant> applicantList=activity.getApplicants();
+
+        for (Record record: recordList) {
+            if(record.getActivityId().equals(activityId.toString())){
+                record.setState(StateCode.PASSED.state());
+                break;
+            }
+        }
+        volunteer.setRecords(recordList);
+
+        for (Applicant applicant: applicantList){
+            if(applicant.getVolunteerId().equals(userId.toString())){
+                applicant.setState(StateCode.PASSED.state());
+                break;
+            }
+        }
+        activity.setApplicants(applicantList);
+
+        volunteerRepository.save(volunteer);
+        activityRepository.save(activity);
     }
 }

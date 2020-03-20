@@ -67,4 +67,15 @@ public class ActivityController {
     public Result listAllActivities() {
         return ResultGenerator.genSuccessResult(activityService.listActivities());
     }
+
+    @ApiOperation("通过用户注册活动的申请")
+    @RequestMapping(value = "pass-registration", method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID",required = true),
+            @ApiImplicitParam(name="activityId",value = "活动ID", required = true)
+    })
+    public Result passRegistration(String userId, String activityId) {
+        activityService.passRegistration(new ObjectId(userId), new ObjectId(activityId));
+        return ResultGenerator.genSuccessResult();
+    }
 }
