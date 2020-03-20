@@ -7,6 +7,7 @@
     <list default="true" id="cc4784fa-23b9-46c1-9d94-18e0d2859676" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/configurer/SwaggerConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/controller/ActivityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ecnuer996/volunteer/service/implement/VolunteerServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -149,7 +150,9 @@
       <workItem from="1584624119623" duration="1212000" />
       <workItem from="1584627252616" duration="122000" />
       <workItem from="1584631011126" duration="86000" />
-      <workItem from="1584631851548" duration="1053000" />
+      <workItem from="1584631851548" duration="1384000" />
+      <workItem from="1584684505031" duration="1172000" />
+      <workItem from="1584691752669" duration="1439000" />
     </task>
     <task id="LOCAL-00001" summary="initialization of this project.">
       <created>1578554430766</created>

@@ -226,6 +226,15 @@ public class VolunteerServiceImpl implements VolunteerService {
         Activity activity = activityRepository.findById(activityId).get();
         Volunteer volunteer = volunteerRepository.findById(userId).get();
 
+        List<Record> recordList=volunteer.getRecords();
+        for (Record record: recordList) {
+            if(record.getActivityId().equals(activityId.toString())){
+                record.setState("已评价");
+                break;
+            }
+        }
+        volunteer.setRecords(recordList);
+
         Comment comment = new Comment();
         comment.setAvatar(volunteer.getAvatar());
         comment.setNickName(volunteer.getNickname());
@@ -238,6 +247,7 @@ public class VolunteerServiceImpl implements VolunteerService {
         activity.setComments(commentList);
 
         activityRepository.save(activity);
+        volunteerRepository.save(volunteer);
 
     }
 

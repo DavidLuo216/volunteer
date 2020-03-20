@@ -64,7 +64,7 @@ public class ActivityController {
 
     @ApiOperation("获取所有活动")
     @RequestMapping(value = "list-all-activities", method = RequestMethod.GET)
-    public Result listAllActvities() {
+    public Result listAllActivities() {
         return ResultGenerator.genSuccessResult(activityService.listActivities());
     }
 }
