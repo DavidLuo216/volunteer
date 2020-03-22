@@ -28,7 +28,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     private ActivityRepository activityRepository;
 
     @Override
-    public String logIn(@NotNull String code, @NotNull String nickname) {
+    public HashMap<String,Object> logIn(@NotNull String code, @NotNull String nickname) {
         String KEY_OPENID = "openid";
 
         // 换取用户openId
@@ -64,7 +64,12 @@ public class VolunteerServiceImpl implements VolunteerService {
             volunteer.setNickname(nickname);
             volunteerRepository.insert(volunteer);
         }
-        return volunteerRepository.findByOpenid(openid).getId();
+
+        HashMap<String,Object> resultMap = new HashMap<String,Object>();
+        resultMap.put("id",volunteerRepository.findByOpenid(openid).getId());
+        resultMap.put("role","volunteer");
+        resultMap.put("nickName",nickname);
+        return resultMap;
     }
 
     @Override

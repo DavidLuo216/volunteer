@@ -25,31 +25,15 @@ import java.util.Map;
 @Api(tags = "志愿者相关接口")
 @RestController
 public class VolunteerController {
-    VolunteerServiceImpl volunteerService;
-    private VolunteerRepository volunteerRepository;
-
     @Autowired
-    public void setVolunteerService(VolunteerServiceImpl volunteerService) {
-        this.volunteerService = volunteerService;
-    }
-
-    @Autowired
-    public void setVolunteerRepository(VolunteerRepository volunteerRepository) {
-        this.volunteerRepository = volunteerRepository;
-    }
+    private VolunteerServiceImpl volunteerService;
 
     @ApiOperation("志愿者微信登陆")
     @RequestMapping(value = "/wx-login", method = RequestMethod.POST)
     public @ResponseBody
     Result weixinLogIn(@RequestParam("code") String code,
                        @RequestParam("nickName") String nickName) {
-
-        String volunteerId = volunteerService.logIn(code, nickName);
-
-        Map<String, Object> data = new HashMap<>(2);
-        data.put("id", volunteerId);
-        data.put("role", "volunteer");
-        return ResultGenerator.genSuccessResult(data);
+        return ResultGenerator.genSuccessResult(volunteerService.logIn(code, nickName));
     }
 
     @ApiOperation("获取志愿者信息")

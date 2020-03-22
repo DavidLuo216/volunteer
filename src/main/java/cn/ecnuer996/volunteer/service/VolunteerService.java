@@ -20,7 +20,7 @@ public interface VolunteerService {
      * @param nickName 用户昵称
      * @return 用户ID
      */
-    String logIn(String code,String nickName);
+    HashMap<String,Object> logIn(String code,String nickName);
 
     /**
      * 查找主键id对应用户
