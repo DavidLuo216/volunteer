@@ -100,31 +100,35 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<Activity> findByTitleLike(String title) {
-        return activityRepository.findByTitleLike(title);
+        if (title == null) {
+            return activityRepository.findAll(Sort.by(Sort.Direction.DESC, "beginTime"));
+        } else {
+            return activityRepository.findByTitleLike(title, Sort.by(Sort.Direction.DESC, "beginTime"));
+        }
     }
 
     @Override
     public List<Activity> listActivities() {
-        return activityRepository.findAll(Sort.by(Sort.Direction.DESC,"beginTime"));
+        return activityRepository.findAll(Sort.by(Sort.Direction.DESC, "beginTime"));
     }
 
     @Override
     public void passRegistration(ObjectId userId, ObjectId activityId) {
         Volunteer volunteer = volunteerRepository.findById(userId).get();
         Activity activity = activityRepository.findById(activityId).get();
-        List<Record> recordList=volunteer.getRecords();
-        List<Applicant> applicantList=activity.getApplicants();
+        List<Record> recordList = volunteer.getRecords();
+        List<Applicant> applicantList = activity.getApplicants();
 
-        for (Record record: recordList) {
-            if(record.getActivityId().equals(activityId.toString())){
+        for (Record record : recordList) {
+            if (record.getActivityId().equals(activityId.toString())) {
                 record.setState(StateCode.PASSED.state());
                 break;
             }
         }
         volunteer.setRecords(recordList);
 
-        for (Applicant applicant: applicantList){
-            if(applicant.getVolunteerId().equals(userId.toString())){
+        for (Applicant applicant : applicantList) {
+            if (applicant.getVolunteerId().equals(userId.toString())) {
                 applicant.setState(StateCode.PASSED.state());
                 break;
             }

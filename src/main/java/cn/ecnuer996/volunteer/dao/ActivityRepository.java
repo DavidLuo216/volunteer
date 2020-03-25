@@ -2,6 +2,7 @@ package cn.ecnuer996.volunteer.dao;
 
 import cn.ecnuer996.volunteer.entity.Activity;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -25,5 +26,5 @@ public interface ActivityRepository extends MongoRepository<Activity, ObjectId> 
      * @param title 活动名称
      * @return 活动列表
      */
-    List<Activity> findByTitleLike(String title);
+    List<Activity> findByTitleLike(String title, Sort sort);
 }
