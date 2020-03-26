@@ -25,8 +25,20 @@ public class BackstageController {
 
     @ApiOperation("获取活动申请人列表")
     @RequestMapping(value = "get-applicant-list", method = RequestMethod.GET)
-    @ApiImplicitParam(name="activityId",value = "活动ID", required = true)
+    @ApiImplicitParam(name = "activityId", value = "活动ID", required = true)
     public Result getApplicantList(String activityId) {
-        return ResultGenerator.genSuccessResult( backstageService.listApplicants( new ObjectId(activityId)));
+        return ResultGenerator.genSuccessResult(backstageService.listApplicants(new ObjectId(activityId)));
+    }
+
+    @ApiOperation("处理志愿者报名申请")
+    @RequestMapping(value = "change-registration-status", method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true),
+            @ApiImplicitParam(name = "activityId", value = "活动ID", required = true),
+            @ApiImplicitParam(name = "command", value = "指令 合法值为通过和拒绝", required = true)
+    })
+    public Result changeRegistrationStatus(String userId, String activityId, String command) {
+        backstageService.changeRegistrationStatus(new ObjectId(userId), new ObjectId(activityId), command);
+        return ResultGenerator.genSuccessResult();
     }
 }

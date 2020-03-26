@@ -1,6 +1,7 @@
 package cn.ecnuer996.volunteer.service;
 
 import org.bson.types.ObjectId;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,4 +17,13 @@ public interface BackstageService {
      * @return 报名人列表
      */
     public List<HashMap> listApplicants(ObjectId activityId);
+
+    /**
+     * 通过或驳回志愿者的申请
+     * @param userId 用户id
+     * @param activityId 活动id
+     * @param command 指令，合法值为“通过”和“拒绝”
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void changeRegistrationStatus(ObjectId userId,ObjectId activityId,String command);
 }
