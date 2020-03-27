@@ -1,11 +1,9 @@
 package cn.ecnuer996.volunteer.service.implement;
 
 import cn.ecnuer996.volunteer.dao.ActivityRepository;
+import cn.ecnuer996.volunteer.dao.OrganizationRepository;
 import cn.ecnuer996.volunteer.dao.VolunteerRepository;
-import cn.ecnuer996.volunteer.entity.Activity;
-import cn.ecnuer996.volunteer.entity.Applicant;
-import cn.ecnuer996.volunteer.entity.Record;
-import cn.ecnuer996.volunteer.entity.Volunteer;
+import cn.ecnuer996.volunteer.entity.*;
 import cn.ecnuer996.volunteer.service.BackstageService;
 import cn.ecnuer996.volunteer.util.ServiceException;
 import cn.ecnuer996.volunteer.util.StateCode;
@@ -27,6 +25,9 @@ public class BackstageServiceImpl implements BackstageService {
 
     @Autowired
     private VolunteerRepository volunteerRepository;
+
+    @Autowired
+    private OrganizationRepository organizationRepository;
 
     @Override
     public List<HashMap> listApplicants(ObjectId activityId) {
@@ -52,10 +53,10 @@ public class BackstageServiceImpl implements BackstageService {
         }
 
         String stateCode;
-        if("通过".equals(command)){
-            stateCode= StateCode.PASSED.state();
-        }else{
-            stateCode= StateCode.REFUSED.state();
+        if ("通过".equals(command)) {
+            stateCode = StateCode.PASSED.state();
+        } else {
+            stateCode = StateCode.REFUSED.state();
         }
 
         Volunteer volunteer = volunteerRepository.findById(userId).get();
@@ -81,5 +82,19 @@ public class BackstageServiceImpl implements BackstageService {
 
         volunteerRepository.save(volunteer);
         activityRepository.save(activity);
+    }
+
+    @Override
+    public String adminLogin(String name, String password) {
+        Organization organization = organizationRepository.findByName(name);
+        if (organization == null) {
+            throw new ServiceException("没有此组织");
+        }
+
+        if (!"password".equals(password)) {
+            throw new ServiceException("密码错误");
+        }
+
+        return organization.getId();
     }
 }

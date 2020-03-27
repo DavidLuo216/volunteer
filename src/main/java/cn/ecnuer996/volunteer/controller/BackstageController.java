@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 /**
  * @author xusheng
@@ -40,5 +41,17 @@ public class BackstageController {
     public Result changeRegistrationStatus(String userId, String activityId, String command) {
         backstageService.changeRegistrationStatus(new ObjectId(userId), new ObjectId(activityId), command);
         return ResultGenerator.genSuccessResult();
+    }
+
+    @ApiOperation("组织后台登陆")
+    @RequestMapping(value = "admin-login", method = RequestMethod.POST)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "organizationName", value = "组织名称", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", required = true)
+    })
+    public Result changeRegistrationStatus(String organizationName, String password) {
+        HashMap <String,Object> resultMap=new HashMap<String, Object>(1);
+        resultMap.put("organizationId",backstageService.adminLogin(organizationName,password));
+        return ResultGenerator.genSuccessResult(resultMap);
     }
 }

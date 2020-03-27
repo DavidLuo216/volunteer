@@ -26,4 +26,12 @@ public interface BackstageService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void changeRegistrationStatus(ObjectId userId,ObjectId activityId,String command);
+
+    /**
+     * 组织后台登陆
+     * @param name 组织名字
+     * @param password 密码
+     * @return 组织id
+     */
+    public String adminLogin(String name,String password);
 }
