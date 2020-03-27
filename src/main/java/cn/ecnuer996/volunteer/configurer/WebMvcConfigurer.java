@@ -41,6 +41,15 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
 
     /**
+     * 解决跨域访问
+     * @param registry registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
+
+    /**
      * 配置swagger访问问题
      *
      * @param registry registry
