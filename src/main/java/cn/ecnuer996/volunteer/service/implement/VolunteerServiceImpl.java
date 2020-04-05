@@ -124,7 +124,7 @@ public class VolunteerServiceImpl implements VolunteerService {
                     .put("activityDetail", activity);
             takenActivitiesMap.put("recordDetail", records.get(i));
             LocalDateTime localTime = LocalDateTime.now();
-            LocalDateTime activityTime = activity.getBeginTime();
+            LocalDateTime activityTime = activity.getEndTime();
             if (localTime.isBefore(activityTime)) {
                 takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime, activityTime) + "天后开始");
             } else {
