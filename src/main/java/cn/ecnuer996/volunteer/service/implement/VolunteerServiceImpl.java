@@ -28,7 +28,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     private ActivityRepository activityRepository;
 
     @Override
-    public HashMap<String,Object> logIn(@NotNull String code, @NotNull String nickname) {
+    public HashMap<String, Object> logIn(@NotNull String code, @NotNull String nickname) {
         String KEY_OPENID = "openid";
 
         // 换取用户openId
@@ -65,10 +65,10 @@ public class VolunteerServiceImpl implements VolunteerService {
             volunteerRepository.insert(volunteer);
         }
 
-        HashMap<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("id",volunteerRepository.findByOpenid(openid).getId());
-        resultMap.put("role","volunteer");
-        resultMap.put("nickName",nickname);
+        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("id", volunteerRepository.findByOpenid(openid).getId());
+        resultMap.put("role", "volunteer");
+        resultMap.put("nickName", nickname);
         return resultMap;
     }
 
@@ -124,9 +124,12 @@ public class VolunteerServiceImpl implements VolunteerService {
                     .put("activityDetail", activity);
             takenActivitiesMap.put("recordDetail", records.get(i));
             LocalDateTime localTime = LocalDateTime.now();
-            LocalDateTime activityTime = activity.getEndTime();
-            if (localTime.isBefore(activityTime)) {
-                takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime, activityTime) + "天后开始");
+            LocalDateTime activityBeginTime = activity.getBeginTime();
+            LocalDateTime activityEndTime = activity.getEndTime();
+            if (localTime.isBefore(activityBeginTime)) {
+                takenActivitiesMap.put("dateStatus", TimeUtil.dateDiff(localTime, activityBeginTime) + "天后开始");
+            } else if (localTime.isAfter(activityBeginTime) && localTime.isBefore(activityEndTime)) {
+                takenActivitiesMap.put("dateStatus", "进行中");
             } else {
                 takenActivitiesMap.put("dateStatus", "已结束");
             }
@@ -188,9 +191,9 @@ public class VolunteerServiceImpl implements VolunteerService {
             }
         }
 
-        List<Applicant> applicantList= activity.getApplicants();
-        for (Applicant applicant: applicantList) {
-            if(applicant.getVolunteerId().equals(userId)){
+        List<Applicant> applicantList = activity.getApplicants();
+        for (Applicant applicant : applicantList) {
+            if (applicant.getVolunteerId().equals(userId)) {
                 resultMap.put("registerInfo", applicant.getInfo());
                 break;
             }
@@ -228,9 +231,9 @@ public class VolunteerServiceImpl implements VolunteerService {
         Activity activity = activityRepository.findById(activityId).get();
         Volunteer volunteer = volunteerRepository.findById(userId).get();
 
-        List<Record> recordList=volunteer.getRecords();
-        for (Record record: recordList) {
-            if(record.getActivityId().equals(activityId.toString())){
+        List<Record> recordList = volunteer.getRecords();
+        for (Record record : recordList) {
+            if (record.getActivityId().equals(activityId.toString())) {
                 record.setState(StateCode.COMMENTED.state());
                 break;
             }
@@ -244,7 +247,7 @@ public class VolunteerServiceImpl implements VolunteerService {
         comment.setContent(commentDetail);
         comment.setDate(new Date());
 
-        List<Comment> commentList=activity.getComments();
+        List<Comment> commentList = activity.getComments();
         commentList.add(comment);
         activity.setComments(commentList);
 
@@ -255,22 +258,22 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Override
     public void removeActivityRegistration(ObjectId userId, ObjectId activityId) {
-        Volunteer volunteer =volunteerRepository.findById(userId).get();
-        Activity activity=activityRepository.findById(activityId).get();
+        Volunteer volunteer = volunteerRepository.findById(userId).get();
+        Activity activity = activityRepository.findById(activityId).get();
 
-        List<Record> recordList=volunteer.getRecords();
-        for ( Record record: recordList) {
-            if (record.getActivityId().equals(activityId.toHexString())){
+        List<Record> recordList = volunteer.getRecords();
+        for (Record record : recordList) {
+            if (record.getActivityId().equals(activityId.toHexString())) {
                 recordList.remove(record);
                 break;
             }
         }
         volunteer.setRecords(recordList);
 
-        activity.setApplicantNum(activity.getApplicantNum()-1);
+        activity.setApplicantNum(activity.getApplicantNum() - 1);
         List<Applicant> applicantList = activity.getApplicants();
-        for (Applicant applicant: applicantList) {
-            if(applicant.getVolunteerId().equals(userId.toString())){
+        for (Applicant applicant : applicantList) {
+            if (applicant.getVolunteerId().equals(userId.toString())) {
                 applicantList.remove(applicant);
                 break;
             }
